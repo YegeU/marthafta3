@@ -103,7 +103,7 @@ JOIN students ON borrows.student_id = students.student_id
 GROUP BY students.student_id
 ORDER BY borrow_count DESC;
 
-ALTER TABLE books ADD COLUMN price NUMERIC(10, 2);
+ALTER TABLE books ADD COLUMN price NUMERIC(8, 2);
 ALTER TABLE books ALTER COLUMN category TYPE VARCHAR(149);
 
 UPDATE books  SET category = 'Psikolojik' WHERE book_id = 1;
@@ -116,16 +116,16 @@ SELECT books.title, borrows.return_date FROM borrows LEFT JOIN books ON borrows.
 SELECT books.title, borrows.return_date FROM books RIGHT JOIN borrows ON books.book_id = borrows.book_id;
 SELECT books.title, borrows.return_date FROM books FULL JOIN borrows ON books.book_id = borrows.book_id;
 
-SELECT category, COUNT(*) AS book_count FROM books GROUP BY category HAVING COUNT(*) >= 2;
+SELECT category, COUNT(*) AS book_count FROM books GROUP BY category HAVING COUNT(*) >= 1;
 
-SELECT * FROM books LIMIT 5;
-SELECT * FROM books LIMIT 5 OFFSET 2;
+SELECT * FROM books LIMIT 3;
+SELECT * FROM books LIMIT 3 OFFSET 1;
 
 SELECT * FROM books WHERE book_id IN (SELECT book_id FROM borrows);
-SELECT title  FROM books  WHERE author_id IN (SELECT author_id FROM authors WHERE name = 'J.K. Rowling');
+SELECT title  FROM books  WHERE author_id IN (SELECT author_id FROM authors WHERE name = 'Shakespeare');
 
 SELECT * FROM books WHERE category = 'Bilgisayar Bilimleri' AND publish_year >= '2020-01-01';
-SELECT * FROM books WHERE category = 'Bilgisayar Bilimleri' OR category = 'Roman';
+SELECT * FROM books WHERE category = 'Bilgisayar Bilimleri' OR category = 'Romantik';
 
 SELECT * FROM books WHERE publish_year BETWEEN '2020-01-01' AND '2022-01-01';
 
